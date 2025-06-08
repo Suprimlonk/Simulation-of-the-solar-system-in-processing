@@ -5,7 +5,7 @@ PImage texturaSol;
 PShape sol;
 ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
-void setup() {
+void setup(){
   size(2500,2000,P3D);
   //Textura del sol
   texturaSol=loadImage("sol.jpg");
@@ -18,7 +18,7 @@ void setup() {
   planetas.add(new Planetas(0.006, 0, 0.01, 15, "tierra.jpg", 200, 0));
   planetas.add(new Planetas(0.005, 0, -0.01, 10, "marte.jpg", 250, 0));
   planetas.add(new Planetas(0.004, 0, 0.01, 35, "jupiter.jpg", 350, 0));
-  planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 450,0));
+  planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 425,0));
   planetas.add(new Planetas(0.003, 0, -0.01, 25, "urano.jpg", 525, 0));
   planetas.add(new Planetas(0.0025,0,0.01,20, "neptuno.jpg",600,0));
   
@@ -27,7 +27,7 @@ void setup() {
   lunas.add(new Lunas(planetas.get(3), 0.01, 40, 5, "phobos.jpg"));
   lunas.add(new Lunas(planetas.get(3), 0.01, 30, 5, "deimos.jpg"));
 }
-void draw() {
+void draw(){
   background(0);
   lights();
   // crear el sol
@@ -40,5 +40,25 @@ void draw() {
   }
   for (Lunas l : lunas) {
   l.mostrar();
+  }
+}
+//utilizar el click para detectar a que planeta se esta presionando
+Planetas planetaSeleccionado=null;
+
+void mouse_click(){
+  for (Planetas p:planetas){
+    if (p.click_T(mouseX, mouseY)){ //Detectar si hay click en algun planeta
+      planetaSeleccionado=p;
+      cam.lookAt(p.getX(), p.getY(), 0, 100); //hacer zoom al planeta
+      println("Planeta seleccionado");
+      break;
+    }
+  }
+}
+//salir del planeta al que le hiciste zoom
+void Salir_zoom(){
+  if(key == "esc"){ //detectar si le das al esc
+    cam.lookAt(0,0,500);
+    planetaSeleccionado=null;
   }
 }
