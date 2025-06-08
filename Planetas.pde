@@ -31,6 +31,7 @@ class Planetas {
     translate(po_x, po_y); //Mueve al planeta a su posición
     angulo += rotacion; //Incrementa rotación
     rotateY(angulo); //Aplica rotación en Y
+    rotateX(angulo); //aplica rotacion en X
     if (figura != null) {
       shape(figura); //Dibuja la esfera con textura
     } else {

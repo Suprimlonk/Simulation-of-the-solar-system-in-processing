@@ -14,12 +14,12 @@ void setup() {
   sol.setStroke(false);
   // Constructor: velocidad angular, pos x inicial, rotación, tamaño, textura, radio órbita, pos y
   planetas.add(new Planetas(0.01, 0, 0.01, 10, "mercurio.jpg",100,0));
-  planetas.add(new Planetas(0.007, 0, 0.01, 20, "venus.jpg", 150,0));
+  planetas.add(new Planetas(0.007, 0, -0.01, 20, "venus.jpg", 150,0));
   planetas.add(new Planetas(0.006, 0, 0.01, 15, "tierra.jpg", 200, 0));
-  planetas.add(new Planetas(0.005, 0, 0.01, 10, "marte.jpg", 250, 0));
+  planetas.add(new Planetas(0.005, 0, -0.01, 10, "marte.jpg", 250, 0));
   planetas.add(new Planetas(0.004, 0, 0.01, 35, "jupiter.jpg", 350, 0));
   planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 450,0));
-  planetas.add(new Planetas(0.003, 0, 0.01, 25, "urano.jpg", 525, 0));
+  planetas.add(new Planetas(0.003, 0, -0.01, 25, "urano.jpg", 525, 0));
   planetas.add(new Planetas(0.0025,0,0.01,20, "neptuno.jpg",600,0));
   
   // Constructor: planeta padre, velocidad lunar, radio órbita luna, tamaño luna, textura
