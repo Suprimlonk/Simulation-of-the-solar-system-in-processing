@@ -1,5 +1,6 @@
 import peasy.*;
 PeasyCam cam;
+boolean camActiva=false;
 // Declaración de objetos y otras cosas
 PImage texturaSol;
 PShape sol;
@@ -7,6 +8,9 @@ ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
 void setup(){
   size(2500,2000,P3D);
+  //camara desactivada al inicio
+  cam = new PeasyCam(this, 2000);
+  cam.setActive(false);
   //Textura del sol
   texturaSol=loadImage("sol.jpg");
   sol=createShape(SPHERE,50);
@@ -28,6 +32,10 @@ void setup(){
   lunas.add(new Lunas(planetas.get(3), 0.01, 30, 5, "deimos.jpg"));
 }
 void draw(){
+  //utilizar la vista normal en caso de no darle click a los planetas
+  if (!camActiva){
+    camera();
+  }
   background(0);
   lights();
   // crear el sol
@@ -40,5 +48,29 @@ void draw(){
   }
   for (Lunas l : lunas) {
   l.mostrar();
+  }
+}
+//detectar un click en processing
+void mousePressed(){
+  if(!camActiva){
+    for(Planetas p:planetas){
+      if(p.click_T(mouseX, mouseY)){
+        planetaSeleccionado = p;
+        cam.setActive(true); // Activar la PeasyCam
+        cam.lookAt(p.getX(), p.getY(), 0, 100); // Hacer zoom al planeta
+        camActiva = true;
+        break;
+      }
+    }
+  }
+}
+//detectar en caso de que se le de al ESC en el estado activo de la PeasyCam
+void keyPressed(){
+  if(key=ESC){
+    key=0; //evitar que Key cierre el programa
+    cam.setActive(false);
+    camActiva=false;
+    planetaSeleccionado=null;
+
   }
 }
