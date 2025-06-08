@@ -43,4 +43,11 @@ class Planetas{
         p_x=width/2 + ra_o*cos(frameCount*v_x);
         p_y=height/2 + ra_o*sin(frameCount*v_x);
     }
+    //vectores para sacar sus posiciones
+    float getX(){
+        return p_x;
+    }
+    float getY(){
+        return p_y;
+    }
 }
