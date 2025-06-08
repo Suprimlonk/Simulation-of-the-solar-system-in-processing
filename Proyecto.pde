@@ -1,19 +1,20 @@
-//crear las camaras
 import peasy.*;
-peasyCam cam;
-//otras cosas como llamar las clases para los objetos
-PImage textura;
-planeta[] Planetas;
-luna[] Lunas;
-void setup(){
-    size(800,800,P3D);
-//el constructor planeta es "Planetas(velocidad angular, posicion en x, velocidad de rotacion en su eje, tamaño planeta, textura, float radio de la órbita del planeta, posicion en y)"
-    tierra=new Planetas(0.01, 0, 0.01, 40, "tierra.jpg", 200, 0)
-//el constructor luna es "Lunas(el planeta que orbita, velocidad angular lunar, radio de la órbita lunar, tamaño de la luna, imagen)
-    luna=new Lunas(tierra, 0.05, 60, 10, "luna.jpg")
-
+PeasyCam cam;
+// Declaración de objetos
+Planetas tierra;
+Lunas luna;
+void setup() {
+  size(800, 800, P3D);
+  cam = new PeasyCam(this, 500);
+  // Constructor: velocidad angular, pos x, rotación, tamaño, textura, radio órbita, pos y
+  tierra = new Planetas(0.01, 0, 0.01, 40, "tierra.jpg", 200, 0);
+  // Constructor: planeta padre, velocidad lunar, radio órbita luna, tamaño luna, textura
+  luna = new Lunas(tierra, 0.05, 60, 10, "luna.jpg");
+  println("Ruta del sketch: " + sketchPath(""));
 }
-
 void draw(){
-
+  background(0);
+  lights();
+  tierra.planeta(); // dibuja el planeta y actualiza su órbita
+  luna.mostrar();   // dibuja la luna orbitando al planeta
 }

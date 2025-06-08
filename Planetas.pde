@@ -4,7 +4,7 @@ class Planetas{
     float po_y; //posicion en y
     PImage textura; //Texturas para los planetas
     float rotacion; //Rotacion del planeta
-    float radio_panetas; //Radio o tamaño del planeta
+    float radio_planetas; //Radio o tamaño del planeta
     float angulo; //Angulos en los que aparece
     float radio_orbitas; //radio de cada orbita
 
@@ -22,32 +22,32 @@ class Planetas{
     void planeta(){
         orbit();
         pushMatrix();
-        translate(p_x, p_y);
+        translate(po_x, po_y);
         angulo+=rotacion;
         rotateY(angulo);
         if (textura != null){
             textureMode(NORMAL);
             beginShape();
             texture(textura);
-            sphere(ra_p);
+            sphere(radio_planetas);
             endShape();
         } else {
             fill(255, 100);
-            sphere(ra_p);
+            sphere(radio_planetas);
         }
         popMatrix();
     }
     //crear la orbita de los planetas 
     void orbit(){
         //ecuaciones parametricas para las orbitas
-        p_x=width/2 + ra_o*cos(frameCount*v_x);
-        p_y=height/2 + ra_o*sin(frameCount*v_x);
+        po_x=width/2 + radio_orbitas*cos(frameCount*vl_x);
+        po_y=height/2 + radio_orbitas*sin(frameCount*vl_x);
     }
     //vectores para sacar sus posiciones
     float getX(){
-        return p_x;
+        return po_x;
     }
     float getY(){
-        return p_y;
+        return po_y;
     }
 }
