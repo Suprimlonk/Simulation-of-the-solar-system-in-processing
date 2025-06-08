@@ -52,4 +52,13 @@ class Planetas {
   float getY() {
     return po_y;
   }
+  //metodo para detectar click a planetas
+  boolean click_T(float mx, float my) {
+    //verificar posiciones
+    float sx=screenX(po_x, po_y, 0);
+    float sy=screenY(po_x, po_y, 0);
+    float d=dist(mx, my, sx, sy);
+    //si la posicion esta en el radio del planeta hace zoom
+    return d<radio_planetas;
+  }
 }
