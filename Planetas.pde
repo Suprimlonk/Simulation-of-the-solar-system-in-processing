@@ -21,8 +21,9 @@ class Planetas{
      //todos los aspectos necesarios de un planeta
     void planeta(){
         orbit();
-        pushMatix();
+        pushMatrix();
         translate(p_x, p_y);
+        angulo+=rotacion;
         rotateY(angulo);
         if (textura != null){
             textureMode(NORMAL);
