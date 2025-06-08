@@ -7,9 +7,11 @@ class Planetas {
   float radio_orbitas; //Radio de la órbita del planeta
   PImage textura; //Textura del planeta
   PShape figura; //aplicar textura para el planeta
+  float velocidadOriginal; //guardar la velocidad original
   //Constructor
   Planetas(float v_x, float p_x, float ro, float ra_p, String archivo, float ra_o, float p_y) {
     vl_x = v_x;
+    velocidadOriginal=v_x;
     po_x = p_x;
     po_y = p_y;
     rotacion = ro;
@@ -52,4 +54,11 @@ class Planetas {
   float getY() {
     return po_y;
   }
-  
+  // Método para detectar si el ratón ha hecho clic sobre un planeta
+  boolean click_T(float mx, float my) {
+    float sx = screenX(po_x, po_y, 0); //Posición en pantalla del planeta
+    float sy = screenY(po_x, po_y, 0);
+    float d = dist(mx, my, sx, sy); //Distancia entre el ratón y el planeta
+    return d < radio_planetas; //Si está dentro del tamaño del planeta, devuelve true
+  }
+}

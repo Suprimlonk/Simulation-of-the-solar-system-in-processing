@@ -3,11 +3,13 @@ class Lunas extends Planetas {
   float radio_orbita_luna; //Radio de la órbita de la luna
   float angulo_luna; //Ángulo actual de la luna en la órbita
   Planetas planetaPadre; //Planeta alrededor del que orbita la luna
+  float po_yL; //posicion en y de la luna
   //Constructor de luna
-  Lunas(Planetas padre, float vl_L, float r_o_l, float radio_luna, String texturaLuna) {
+  Lunas(Planetas padre,float p_yL, float vl_L, float r_o_l, float radio_luna, String texturaLuna) {
     //Llama al constructor de Planetas
     super(vl_L, 0, 0, radio_luna, texturaLuna, r_o_l, 0);
     planetaPadre = padre;
+    po_yL=p_yL;
     vl_luna = vl_L;
     radio_orbita_luna = r_o_l;
     angulo_luna = random(TWO_PI);
