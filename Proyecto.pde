@@ -57,7 +57,7 @@ void mouse_click(){
 }
 //salir del planeta al que le hiciste zoom
 void Salir_zoom(){
-  if(key == "esc"){ //detectar si le das al esc
+  if(key == ESC){ //detectar si le das al esc
     cam.lookAt(0,0,500);
     planetaSeleccionado=null;
   }
