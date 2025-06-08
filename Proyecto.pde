@@ -42,23 +42,3 @@ void draw(){
   l.mostrar();
   }
 }
-//utilizar el click para detectar a que planeta se esta presionando
-Planetas planetaSeleccionado=null;
-
-void mouse_click(){
-  for (Planetas p:planetas){
-    if (p.click_T(mouseX, mouseY)){ //Detectar si hay click en algun planeta
-      planetaSeleccionado=p;
-      cam.lookAt(p.getX(), p.getY(), 0, 100); //hacer zoom al planeta
-      println("Planeta seleccionado");
-      break;
-    }
-  }
-}
-//salir del planeta al que le hiciste zoom
-void Salir_zoom(){
-  if(key == ESC){ //detectar si le das al esc
-    cam.lookAt(0,0,500);
-    planetaSeleccionado=null;
-  }
-}
