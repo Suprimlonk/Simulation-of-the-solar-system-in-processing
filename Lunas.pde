@@ -1,38 +1,34 @@
 class Lunas extends Planetas {
-  float vl_luna; //velocidad angular de la luna
-  float radio_orbita_luna; //radio de la órbita de la luna
-  float angulo_luna; //ángulo actual en la órbita
-  Planetas planetaPadre; //planeta que orbita
-
+  float vl_luna; //Velocidad angular de la luna
+  float radio_orbita_luna; //Radio de la órbita de la luna
+  float angulo_luna; //Ángulo actual de la luna en la órbita
+  Planetas planetaPadre; //Planeta alrededor del que orbita la luna
+  //Constructor de luna
   Lunas(Planetas padre, float vl_L, float r_o_l, float radio_luna, String texturaLuna) {
-    //Llamada al constructor de la clase Planetas con valores dummy
+    //Llama al constructor de Planetas
     super(vl_L, 0, 0, radio_luna, texturaLuna, r_o_l, 0);
     planetaPadre = padre;
     vl_luna = vl_L;
     radio_orbita_luna = r_o_l;
     angulo_luna = random(TWO_PI);
   }
-    //utilizar un metodo para mostrar las lunas
+  //Muestra la luna y actualiza su posición orbital respecto al planeta padre
   void mostrar() {
-    orbitas(); //actualiza la posición de la luna
+    orbitas(); //Actualiza posición orbital de la luna
     pushMatrix();
-    translate(po_x, po_y);
-    rotateY(angulo_luna);
-    if (textura != null) {
-      textureMode(NORMAL);
-      beginShape();
-      texture(textura);
-      sphere(radio_planetas);
-      endShape();
+    translate(po_x, po_y); //Mueve la luna a su posición
+    rotateY(angulo_luna); //Aplica rotación en Y
+    if (figura != null) {
+      shape(figura); //Dibuja la esfera con textura
     } else {
-      fill(180);
-      sphere(radio_planetas);
+      fill(180); //Color relleno si no hay textura
+      sphere(radio_planetas); //Dibuja esfera simple
     }
     popMatrix();
   }
-    //crear las orbitas y que sigan a los planetas necesarios
+  //Calcula la posición de la luna respecto al planeta padre
   void orbitas() {
-    angulo_luna += vl_luna;
+    angulo_luna += vl_luna; //Incrementa ángulo orbital
     po_x = planetaPadre.getX() + radio_orbita_luna * cos(angulo_luna);
     po_y = planetaPadre.getY() + radio_orbita_luna * sin(angulo_luna);
   }

@@ -10,9 +10,8 @@ void setup() {
   tierra = new Planetas(0.01, 0, 0.01, 40, "tierra.jpg", 200, 0);
   // Constructor: planeta padre, velocidad lunar, radio órbita luna, tamaño luna, textura
   luna = new Lunas(tierra, 0.05, 60, 10, "luna.jpg");
-  println("Ruta del sketch: " + sketchPath(""));
 }
-void draw(){
+void draw() {
   background(0);
   lights();
   tierra.planeta(); // dibuja el planeta y actualiza su órbita
