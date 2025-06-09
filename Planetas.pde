@@ -1,6 +1,6 @@
 class Planetas {
   float vl_x; //Velocidad angular en x
-  float po_x, po_y; //Posiciones x e y
+  float po_x, po_y, po_z; //Posiciones x e y
   float rotacion; //Rotación del planeta
   float radio_planetas; //Radio o tamaño del planeta
   float angulo; //Ángulo de rotación
@@ -30,7 +30,7 @@ class Planetas {
   void planeta() {
     orbit(); //Actualiza posición orbital
     pushMatrix();
-    translate(po_x, po_y); //Mueve al planeta a su posición
+    translate(po_x, po_y, po_z);//Mueve al planeta a su posición
     angulo += rotacion; //Incrementa rotación
     rotateY(angulo); //Aplica rotación en Y
     rotateX(angulo); //aplica rotacion en X
@@ -46,14 +46,19 @@ class Planetas {
   void orbit() {
     po_x = width / 2 + radio_orbitas * cos(frameCount * vl_x);
     po_y = height / 2 + radio_orbitas * sin(frameCount * vl_x);
+    po_z = 0;
   }
-  //Métodos para obtener la posición x e y
+  //Métodos para obtener la posicion de x,y,z
   float getX() {
     return po_x;
   }
   float getY() {
     return po_y;
   }
+  float getZ(){
+    return po_z;
+  }
+  // Método para detectar si el ratón ha hecho clic sobre un planeta
   // Método para detectar si el ratón ha hecho clic sobre un planeta
   boolean click_T(float mx, float my) {
     float sx = screenX(po_x, po_y, 0); //Posición en pantalla del planeta

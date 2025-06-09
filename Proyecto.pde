@@ -1,6 +1,3 @@
-import peasy.*;
-PeasyCam cam;
-boolean camActiva=false;
 // Declaración de objetos y otras cosas
 PImage texturaSol;
 PShape sol;
@@ -8,13 +5,16 @@ PImage bg;
 int y;
 ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
-Planetas planetaSeleccionado = null;
+//variables para seguir los planetas al dar click
+Planetas planetaSeleccionado=null;
+boolean seguirPlaneta=false;
+float distanciaCam = 1000;  // zoom inicial
+
 void setup(){
   fullScreen(P3D);
-  //camara desactivada al inicio
-  cam = new PeasyCam(this, 1);
-  cam.setActive(false);
-  //Textura del sol
+// Cámara fija desde arriba (vista cenital)
+  distanciaCam=1000;
+//Textura del sol
   texturaSol=loadImage("sol.jpg");
   sol=createShape(SPHERE,50);
   sol.setTexture(texturaSol);
@@ -28,7 +28,6 @@ void setup(){
   planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 400,0));
   planetas.add(new Planetas(0.003, 0, -0.01, 25, "urano.jpg", 480, 0));
   planetas.add(new Planetas(0.0025,0,0.01,20, "neptuno.jpg",550,0));
-  
   //Constructor: planeta padre, posicion en y, velocidad lunar, radio órbita luna, tamaño luna, textura
   lunas.add(new Lunas(planetas.get(2), 2, 0.01, 30, 5, "luna.jpg"));
   lunas.add(new Lunas(planetas.get(3), 2, 0.01, 40, 5, "phobos.jpg"));
@@ -39,27 +38,38 @@ void setup(){
     bg.resize(displayWidth, displayHeight);
   }
 }
+
 void draw(){
   //crear el fondo que se va a usar
   background(bg);
+  lights();
   stroke(226, 204, 0);
-  line(0, y, width, y);
   y++;
   if (y > height) {
     y = 0;
   }
-  //utilizar la vista normal en caso de no darle click a los planetas
-  if (!camActiva){
-    camera();
+//Crar la manera para que se siga un planeta al dar click
+      if (seguirPlaneta && planetaSeleccionado != null) {
+    // Posición del planeta
+    float px = planetaSeleccionado.getX();
+    float py = planetaSeleccionado.getY();
+    float pz = planetaSeleccionado.getZ();
+// Camara fija detrás y un poco arriba del planeta
+    float camX = px;
+    float camY = py + 100;
+    float camZ = pz + 300;
+//Mirar hacia el planeta
+    camera(camX, camY, camZ, px, py, pz, 0, 1, 0);
+  } else {
+//Vista cenital fija (desde arriba mirando el centro)
+    camera(width/2, height/2, distanciaCam, width/2, height/2, 0, 0, 1, 0);
   }
-  background(0);
-  lights();
-  // crear el sol
+// crear el sol
   pushMatrix();
   translate(width/2, height/2, 0);
   shape(sol);
   popMatrix();
-  //dibujar los planetas y lunas
+//dibujar los planetas y lunas
   for (Planetas p:planetas){
     p.planeta();
   }
@@ -69,30 +79,20 @@ void draw(){
 }
 //detectar un click en processing
 void mousePressed(){
-  if(!camActiva){
-    for(Planetas p:planetas){
-      if(p.click_T(mouseX, mouseY)){
-        planetaSeleccionado = p;
-        p.vl_x=0;
-        cam.setActive(true); // Activar la PeasyCam
-        cam.lookAt(p.getX(), p.getY(), 0, 500); // Hacer zoom al planeta
-        translate(p.getX(), p.getY());
-        camActiva = true;
-        break;
-      }
+  for(Planetas p:planetas){
+   if(p.click_T(mouseX, mouseY)){
+     planetaSeleccionado = p;
+     seguirPlaneta=true;
+     break;
     }
   }
 }
+
 //detectar en caso de que se le de al ESC en el estado activo de la PeasyCam
 void keyPressed(){
   if (key==ESC){
     key=0; //evitar que Key cierre el programa
-    cam.setActive(false);
-    camActiva=false;
-    if(planetaSeleccionado!= null){
-      planetaSeleccionado.vl_x = planetaSeleccionado.velocidadOriginal; //resetear la velocidad del planeta seleccionado
-    }
+    seguirPlaneta=false;
     planetaSeleccionado=null;
-    translate(width/2, height/2, 0);
   }
 }
