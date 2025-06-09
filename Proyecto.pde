@@ -2,7 +2,6 @@
 PImage texturaSol;
 PShape sol;
 PImage bg;
-int y;
 ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
 //variables para seguir los planetas al dar click
@@ -50,18 +49,18 @@ void draw(){
   }
 //Crar la manera para que se siga un planeta al dar click
       if (seguirPlaneta && planetaSeleccionado != null) {
-    // Posición del planeta
+// Posición del planeta
     float px = planetaSeleccionado.getX();
     float py = planetaSeleccionado.getY();
     float pz = planetaSeleccionado.getZ();
-// Camara fija detrás y un poco arriba del planeta
+// Camara fija detras y un poco arriba del planeta
     float camX = px;
     float camY = py + 100;
     float camZ = pz + 300;
 //Mirar hacia el planeta
     camera(camX, camY, camZ, px, py, pz, 0, 1, 0);
   } else {
-//Vista cenital fija (desde arriba mirando el centro)
+//Vista general
     camera(width/2, height/2, distanciaCam, width/2, height/2, 0, 0, 1, 0);
   }
 // crear el sol
@@ -77,7 +76,7 @@ void draw(){
   l.mostrar();
   }
 }
-//detectar un click en processing
+//detectar un click al planeta
 void mousePressed(){
   for(Planetas p:planetas){
    if(p.click_T(mouseX, mouseY)){
@@ -88,7 +87,7 @@ void mousePressed(){
   }
 }
 
-//detectar en caso de que se le de al ESC en el estado activo de la PeasyCam
+//detectar cuando de da ESC para salir al modo de vizualizacion completa
 void keyPressed(){
   if (key==ESC){
     key=0; //evitar que Key cierre el programa
