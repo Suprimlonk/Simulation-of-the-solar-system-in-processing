@@ -21,18 +21,27 @@ void setup(){
   sol.setTexture(texturaSol);
   sol.setStroke(false);
   //Constructor: velocidad angular, pos x inicial, rotación, tamaño, textura, radio órbita, pos y
-  planetas.add(new Planetas(0.01, 0, 0.01, 10, "mercurio.jpg",100,0));
-  planetas.add(new Planetas(0.007, 0, -0.01, 20, "venus.jpg", 150,0));
-  planetas.add(new Planetas(0.006, 0, 0.01, 15, "tierra.jpg", 200, 0));
-  planetas.add(new Planetas(0.005, 0, -0.01, 10, "marte.jpg", 250, 0));
-  planetas.add(new Planetas(0.004, 0, 0.01, 35, "jupiter.jpg", 320, 0));
-  planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 400,0));
-  planetas.add(new Planetas(0.003, 0, -0.01, 25, "urano.jpg", 480, 0));
-  planetas.add(new Planetas(0.0025,0,0.01,20, "neptuno.jpg",550,0));
+  planetas.add(new Planetas(0.01, 0, 0.01, 5, "mercurio.jpg",100,0));
+  planetas.add(new Planetas(0.007, 0, -0.01, 15, "venus.jpg", 125,0));
+  planetas.add(new Planetas(0.006, 0, 0.01, 10, "tierra.jpg", 155, 0));
+  planetas.add(new Planetas(0.005, 0, -0.01, 5, "marte.jpg", 190, 0));
+  planetas.add(new Planetas(0.004, 0, 0.01, 30, "jupiter.jpg", 250, 0));
+  planetas.add(new Planetas(0.0035, 0, 0.01, 25, "saturno.jpg", 350,0));
+  planetas.add(new Planetas(0.003, 0, -0.01, 20, "urano.jpg", 425, 0));
+  planetas.add(new Planetas(0.0025,0, 0.01, 15, "neptuno.jpg", 490,0));
   //Constructor: planeta padre, posicion en y, velocidad lunar, radio órbita luna, tamaño luna, textura
-  lunas.add(new Lunas(planetas.get(2), 2, 0.01, 30, 5, "luna.jpg"));
-  lunas.add(new Lunas(planetas.get(3), 2, 0.01, 40, 5, "phobos.jpg"));
-  lunas.add(new Lunas(planetas.get(3), 2, 0.01, 30, 5, "deimos.jpg"));
+  lunas.add(new Lunas(planetas.get(2), 2, 0.01, 25, 3, "luna.jpg"));
+  lunas.add(new Lunas(planetas.get(3), 2, 0.015, 15, 2.5, "phobos.jpg"));
+  lunas.add(new Lunas(planetas.get(3), 2, 0.01, 20, 3, "deimos.jpg"));
+  lunas.add(new Lunas(planetas.get(4), 2, 0.02, 40, 6, "luna.jpg"));//lunas de jupiter
+  lunas.add(new Lunas(planetas.get(4), 2, 0.015, 45, 6, "phobos.jpg"));
+  lunas.add(new Lunas(planetas.get(4), 2, 0.01, 60, 7, "deimos.jpg"));
+  lunas.add(new Lunas(planetas.get(4), 2, 0.008, 67, 6, "phobos.jpg"));
+  lunas.add(new Lunas(planetas.get(6), 2, 0.0015, 40, 4, "deimos.jpg"));//lunas urano
+  lunas.add(new Lunas(planetas.get(6), 2, 0.001, 30, 5, "luna.jpg"));
+  
+  
+  
   //imagen para el fondo
   bg=loadImage("espacio.jpg");
   if(bg != null) {
@@ -93,7 +102,7 @@ for (int i = 0; i < planetas.size(); i++) {
     rotateY(p.angulo);
     imageMode(CENTER);
     tint(255, 200); // para hacer el anillo visible y translúcido
-    image(anilloSaturno, 0, 0, 150, 175);
+    image(anilloSaturno, 0, 0, 100, 125);
     noTint();
     popMatrix();
     }
