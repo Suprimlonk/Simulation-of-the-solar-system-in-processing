@@ -50,7 +50,7 @@ void draw(){
   }
 //Crar la manera para que se siga un planeta al dar click
       if (seguirPlaneta && planetaSeleccionado != null) {
-// Posición del planeta
+// variables de Posición del planeta
     float px = planetaSeleccionado.getX();
     float py = planetaSeleccionado.getY();
     float pz = planetaSeleccionado.getZ();
@@ -63,6 +63,17 @@ void draw(){
   } else {
 //Vista general
     camera(width/2, height/2, distanciaCam, width/2, height/2, 0, 0, 1, 0);
+  }
+    // Traza las órbitas
+  pushStyle();
+  noFill();
+  stroke(255, 100);
+  strokeWeight(1);
+  for (Planetas p : planetas) {
+    pushMatrix();
+    translate(width / 2, height / 2, 0);
+    ellipse(0, 0, 2 * p.radio_orbitas, 2 * p.radio_orbitas);
+    popMatrix();
   }
 // crear el sol
   pushMatrix();
