@@ -3,7 +3,7 @@ PImage texturaSol;
 PShape sol;
 PImage bg;
 int y;
-anilloSaturno=loadImage("Anillo.png");
+PImage anilloSaturno;
 ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
 //variables para seguir los planetas al dar click
@@ -12,6 +12,7 @@ boolean seguirPlaneta=false;
 float distanciaCam = 1000;  // zoom inicial
 void setup(){
   fullScreen(P3D);
+  anilloSaturno=loadImage("Anillo.png");
 // Cámara fija desde arriba (vista cenital)
   distanciaCam=1000;
 //Textura del sol
@@ -26,17 +27,6 @@ void setup(){
   planetas.add(new Planetas(0.005, 0, -0.01, 10, "marte.jpg", 250, 0));
   planetas.add(new Planetas(0.004, 0, 0.01, 35, "jupiter.jpg", 320, 0));
   planetas.add(new Planetas(0.0035, 0, 0.01, 30, "saturno.jpg", 400,0));
-  //cear el cinturon de asteroides
-  if (p==planetas.get(5)){
-    pushMatrix();
-    translate(p.getX(), p.getY(), p.getZ());
-    rotateX(HALF_PI);
-    imageMode(CENTER);
-    if (anilloSaturno != null){
-      image(anilloSaturno, 0, 0, 160, 160);
-    }
-    popMartix();
-  }
   planetas.add(new Planetas(0.003, 0, -0.01, 25, "urano.jpg", 480, 0));
   planetas.add(new Planetas(0.0025,0,0.01,20, "neptuno.jpg",550,0));
   //Constructor: planeta padre, posicion en y, velocidad lunar, radio órbita luna, tamaño luna, textura
@@ -92,8 +82,21 @@ void draw(){
   shape(sol);
   popMatrix();
 //dibujar los planetas y lunas
-  for (Planetas p:planetas){
-    p.planeta();
+for (int i = 0; i < planetas.size(); i++) {
+  Planetas p = planetas.get(i);
+  p.planeta();
+//dibujar el anillo de saturno
+  if (i == 5 && anilloSaturno != null) { // Saturno
+    pushMatrix();
+    translate(p.getX(), p.getY(), p.getZ());
+    rotateX(p.angulo);
+    rotateY(p.angulo);
+    imageMode(CENTER);
+    tint(255, 200); // para hacer el anillo visible y translúcido
+    image(anilloSaturno, 0, 0, 150, 175);
+    noTint();
+    popMatrix();
+    }
   }
   for (Lunas l : lunas) {
   l.mostrar();
