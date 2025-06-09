@@ -1,3 +1,5 @@
+//codigo hecho por Marco Aurelio Tamez Robles
+
  // Declaración de objetos y otras cosas
 PImage texturaSol;
 PShape sol;
@@ -39,9 +41,6 @@ void setup(){
   lunas.add(new Lunas(planetas.get(4), 2, 0.008, 67, 6, "phobos.jpg"));
   lunas.add(new Lunas(planetas.get(6), 2, 0.0015, 40, 4, "deimos.jpg"));//lunas urano
   lunas.add(new Lunas(planetas.get(6), 2, 0.001, 30, 5, "luna.jpg"));
-  
-  
-  
   //imagen para el fondo
   bg=loadImage("espacio.jpg");
   if(bg != null) {
@@ -110,6 +109,16 @@ for (int i = 0; i < planetas.size(); i++) {
   for (Lunas l : lunas) {
   l.mostrar();
   }
+// Cartel con instrucciones
+  pushStyle();
+  fill(0, 150);//Fondo del cartel
+  noStroke();
+  rect(20, 20, 360, 60);//Tamaño del cartel
+  fill(255);
+  textSize(25);
+  textAlign(LEFT, TOP);
+  text("Haz click en un planeta para hacerle zoom\nESC para salir del modo de observación", 30, 30);
+  popStyle();
 }
 //detectar un click al planeta
 void mousePressed(){
