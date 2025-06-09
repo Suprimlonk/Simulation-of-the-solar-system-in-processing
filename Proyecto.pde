@@ -2,6 +2,7 @@
 PImage texturaSol;
 PShape sol;
 PImage bg;
+int y;
 ArrayList<Planetas> planetas = new ArrayList<Planetas>();
 ArrayList<Lunas> lunas = new ArrayList<Lunas>();
 //variables para seguir los planetas al dar click
