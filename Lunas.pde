@@ -1,3 +1,5 @@
+//codigo realizado por Marco Aurelio Tamez Robles
+
 class Lunas extends Planetas {
   float vl_luna; //Velocidad angular de la luna
   float radio_orbita_luna; //Radio de la órbita de la luna
@@ -31,7 +33,7 @@ class Lunas extends Planetas {
   //Calcula la posición de la luna respecto al planeta padre
   void orbitas() {
     angulo_luna += vl_luna; //Incrementa ángulo orbital
-    po_x = planetaPadre.getX() + radio_orbita_luna * cos(angulo_luna);
+    po_x = planetaPadre.getX() + radio_orbita_luna * -cos(angulo_luna);
     po_y = planetaPadre.getY() + radio_orbita_luna * sin(angulo_luna);
   }
 }
