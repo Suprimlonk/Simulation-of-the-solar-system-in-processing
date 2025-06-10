@@ -1,3 +1,5 @@
+//codigo realizado por Marco Aurelio Tamez Robles
+
 class Planetas {
   float vl_x; //Velocidad angular en x
   float po_x, po_y, po_z; //Posiciones x e y
@@ -44,8 +46,8 @@ class Planetas {
   }
   //Crear una orbita para los planetas
   void orbit() {
-    po_x = width / 2 + radio_orbitas * cos(frameCount * vl_x);
-    po_y = height / 2 + radio_orbitas * sin(frameCount * vl_x);
+    po_x = width / 2 + radio_orbitas * -cos(frameCount * vl_x);
+    po_y = height / 2 + radio_orbitas * -sin(frameCount * vl_x);
     po_z = 0;
   }
   //Métodos para obtener la posicion de x,y,z
